@@ -1,795 +1,528 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  >
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jack The Inbox - Premium Digital Assets for Email & SMS Campaigns</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 120px 0 80px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #fff, #e0e7ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .btn-primary {
-            background: white;
-            color: #667eea;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: #667eea;
-            transform: translateY(-3px);
-        }
-
-        /* Services Section */
-        .services {
-            padding: 100px 0;
-            background: #f8fafc;
-        }
-
-        .services h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: #1e293b;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(102, 126, 234, 0.1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
-        }
-
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #1e293b;
-        }
-
-        .service-card p {
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-        /* Portfolio Section */
-        .portfolio {
-            padding: 100px 0;
-            background: white;
-        }
-
-        .portfolio h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: #1e293b;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .portfolio-item {
-            background: #f8fafc;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .portfolio-image {
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .portfolio-content {
-            padding: 1.5rem;
-        }
-
-        .portfolio-content h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #1e293b;
-        }
-
-        .portfolio-content p {
-            color: #64748b;
-            font-size: 0.9rem;
-        }
-
-        /* About Section */
-        .about {
-            padding: 100px 0;
-            background: #1e293b;
-            color: white;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-        }
-
-        .about-image {
-            height: 400px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 100px 0;
-            background: white;
-        }
-
-        .contact h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: #1e293b;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #f8fafc;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #1e293b;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-            background: white;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Footer */
-        footer {
-            background: #1e293b;
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: #667eea;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: #94a3b8;
-            text-decoration: none;
-            line-height: 1.6;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #334155;
-            padding-top: 2rem;
-            color: #94a3b8;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .services-grid,
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+  <!-- Site made with Mobirise Website Builder v6.0.6, https://mobirise.com -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v6.0.6, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
+  <meta name="description" content="">
+  
+  
+  <title>Home</title>
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/animatecss/animate.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/socicon/css/styles.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="stylesheet" href="assets/gallery/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,500,600,700,800,900,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,500,600,700,800,900,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
+  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=Msr1nz"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=Msr1nz" type="text/css">
+
+  
+  
+  
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">Jack The Inbox</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <a href="#contact" class="cta-button">Get Started</a>
-        </nav>
-    </header>
+  
+  <section data-bs-version="5.1" class="menu menu2 cid-tJS6tZXiPa" once="menu" id="menu02-0">
+	
 
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Premium Digital Assets for Email & SMS Campaigns</h1>
-                <p>Transform your marketing campaigns with stunning, conversion-focused designs that captivate your audience and drive results.</p>
-                <div class="hero-buttons">
-                    <a href="#portfolio" class="btn-primary">View Our Work</a>
-                    <a href="#contact" class="btn-secondary">Start Your Project</a>
+	<nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+		<div class="container">
+			<div class="navbar-brand">
+				<span class="navbar-logo">
+					<a href="https://mobirise.com">
+						<img src="assets/images/logo.png" alt="Mobirise Website Builder" style="height: 3rem;">
+					</a>
+				</span>
+				<span class="navbar-caption-wrap"><a class="navbar-caption text-black text-primary display-4" href="index.html#header05-1">Mobirise</a></span>
+			</div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<div class="hamburger">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
+						<a class="nav-link link text-black text-primary display-4" href="index.html#header01-7">About</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link link text-black text-primary display-4" href="index.html#features04-w" aria-expanded="false">Services</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link link text-black text-primary display-4" href="index.html#contacts02-9">Contacts</a>
+					</li></ul>
+				
+				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="index.html#form02-6"> Start now</a></div>
+			</div>
+		</div>
+	</nav>
+</section>
+
+<section data-bs-version="5.1" class="header5 cid-tJS6uM4N87" id="header05-1">
+	
+
+	
+	
+	<div class="topbg"></div>
+	<div class="align-center container">
+		<div class="row justify-content-center">
+			<div class="col-md-12 col-lg-9">
+				<h1 class="mbr-section-title mbr-fonts-style mb-4 display-1"><strong>Create amazing websites</strong></h1>
+				<p class="mbr-text mbr-fonts-style mb-4 display-7">Click any text to edit or style it. Select text to insert a link.
+<br>Click the blue icon at the top right corner (Block Parameters) of the block to hide/show buttons, text, title, and change the block background. Click the red "+" button at the bottom right corner to add a new block. Use the top left menu to create new pages, sites, and add new themes and extensions.</p>
+				<div class="mbr-section-btn mt-3"><a class="btn btn-primary display-7" href="index.html#form02-6">Start now</a> <a class="btn btn-primary-outline display-7" href="index.html#gallery02-v">Live demo</a></div>
+			</div>
+		</div>
+		<div class="row mt-5 justify-content-center">
+			<div class="col-12 col-lg-12">
+				<img src="assets/images/11.jpg" alt="Mobirise Website Builder" title="">
+			</div>
+		</div>
+	</div>
+</section>
+
+<section data-bs-version="5.1" class="features4 cid-tMlEXTHLbS" id="features04-w">
+	
+	
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 content-head">
+				<div class="mbr-section-head mb-5">
+					<h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2"><strong>Our Services</strong></h4>
+					<h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-4 display-7">Hover over pictures to add more cards or rearrange them with the Tools panel. Add multiple cards by selecting multiple images. You can set the number of columns in Block Parameters.</h5>
+					
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="item features-image col-12 col-md-6 col-lg-4">
+				<div class="item-wrapper">
+					<div class="item-img">
+						<img src="assets/images/gallery03.jpg" alt="Mobirise Website Builder">
+					</div>
+					<div class="item-content">
+						<h5 class="item-title mbr-fonts-style display-5">
+							<strong>Marketing</strong>
+						</h5>
+						
+						<p class="mbr-text mbr-fonts-style display-7">
+							Service Description. You can show/hide the title, subtitle, text, button in the Block Parameters
+						</p>
+						<div class="mbr-section-btn item-footer"><a href="" class="btn item-btn btn-primary display-7">Learn more</a></div>
+					</div>
+
+				</div>
+			</div>
+			<div class="item features-image col-12 col-md-6 col-lg-4">
+				<div class="item-wrapper">
+					<div class="item-img">
+						<img src="assets/images/gallery05.jpg" alt="Mobirise Website Builder">
+					</div>
+					<div class="item-content">
+						<h5 class="item-title mbr-fonts-style display-5">
+							<strong>Promotion</strong>
+						</h5>
+						
+						<p class="mbr-text mbr-fonts-style display-7">
+							Service Description. You can show/hide the title, subtitle, text, button in the Block Parameters
+						</p>
+						<div class="mbr-section-btn item-footer"><a href="" class="btn item-btn btn-primary display-7">Learn more</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="item features-image col-12 col-md-6 col-lg-4">
+				<div class="item-wrapper">
+					<div class="item-img">
+						<img src="assets/images/gallery02.jpg" alt="Mobirise Website Builder">
+					</div>
+					<div class="item-content">
+						<h5 class="item-title mbr-fonts-style display-5">
+							<strong>Branding</strong>
+						</h5>
+						
+						<p class="mbr-text mbr-fonts-style display-7">
+							Service Description. You can show/hide the title, subtitle, text, button in the Block Parameters<br>
+						</p>
+						<div class="mbr-section-btn item-footer"><a href="" class="btn item-btn btn-primary display-7">Learn more</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section data-bs-version="5.1" class="gallery1 mbr-gallery cid-tMlDYtQ5fF" id="gallery02-v">
+    
+
+    
+    
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 content-head">
+                <div class="mbr-section-head mb-5">
+                    <h3 class="mbr-section-title mbr-fonts-style align-center m-0 display-2"><strong>Gallery with Masonry Grid and Popup Slider</strong></h3>
+                    <h4 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-4 display-7">Use images of different sizes in this gallery. Click on the image to change it. Click on the + (Add Items) button to add multiple pictures at once.</h4>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="fade-in">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card fade-in">
-                    <div class="service-icon">📧</div>
-                    <h3>Email Templates</h3>
-                    <p>Custom-designed email templates that are mobile-responsive, brand-aligned, and optimized for maximum engagement and conversions.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">📱</div>
-                    <h3>SMS Graphics</h3>
-                    <p>Eye-catching visual assets for SMS campaigns including promotional graphics, product showcases, and branded imagery.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">🎨</div>
-                    <h3>Brand Assets</h3>
-                    <p>Complete brand identity packages including logos, color schemes, typography, and style guides for consistent messaging.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">📊</div>
-                    <h3>Campaign Analytics</h3>
-                    <p>Custom infographics and visual reports to showcase your campaign performance and marketing metrics effectively.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">⚡</div>
-                    <h3>Quick Turnaround</h3>
-                    <p>Fast delivery options for urgent campaigns with our streamlined design process and dedicated project management.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">🔄</div>
-                    <h3>Unlimited Revisions</h3>
-                    <p>We work with you until you're 100% satisfied with your digital assets, ensuring they meet your exact requirements.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <h2 class="fade-in">Featured Work</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item fade-in">
-                    <div class="portfolio-image">E-commerce Newsletter</div>
-                    <div class="portfolio-content">
-                        <h3>Fashion Retailer Campaign</h3>
-                        <p>Complete email template series with 40% higher open rates and 25% increase in click-through rates.</p>
+        <div class="row mbr-gallery mbr-masonry" data-masonry="{&quot;percentPosition&quot;: true }">
+            <div class="col-12 col-md-6 col-lg-3 item gallery-image">
+                <div class="item-wrapper" data-toggle="modal" data-bs-toggle="modal" data-target="#uP8GLjTWjT-modal" data-bs-target="#uP8GLjTWjT-modal">
+                    <img class="w-100" src="assets/images/gallery03.jpg" alt="Mobirise Website Builder" data-slide-to="0" data-bs-slide-to="0" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT">
+                    <div class="icon-wrapper">
+                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
                     </div>
                 </div>
-                <div class="portfolio-item fade-in">
-                    <div class="portfolio-image">SMS Promotion Series</div>
-                    <div class="portfolio-content">
-                        <h3>Restaurant Chain SMS</h3>
-                        <p>Visual SMS campaign assets that drove 60% more in-store visits during promotional periods.</p>
-                    </div>
-                </div>
-                <div class="portfolio-item fade-in">
-                    <div class="portfolio-image">SaaS Onboarding</div>
-                    <div class="portfolio-content">
-                        <h3>Tech Startup Sequence</h3>
-                        <p>User onboarding email templates that improved customer activation by 35%.</p>
-                    </div>
-                </div>
-                <div class="portfolio-item fade-in">
-                    <div class="portfolio-image">Holiday Campaign</div>
-                    <div class="portfolio-content">
-                        <h3>Seasonal Retail Push</h3>
-                        <p>Multi-channel holiday campaign assets resulting in record-breaking seasonal sales.</p>
-                    </div>
-                </div>
-                <div class="portfolio-item fade-in">
-                    <div class="portfolio-image">B2B Newsletter</div>
-                    <div class="portfolio-content">
-                        <h3>Corporate Communications</h3>
-                        <p>Professional newsletter design system for Fortune 500 company internal communications.</p>
-                    </div>
-                </div>
-                <div class="portfolio-item fade-in">
-                    <div class="portfolio-image">Product Launch</div>
-                    <div class="portfolio-content">
-                        <h3>New Product Announcement</h3>
-                        <p>Complete launch sequence with teaser emails, SMS alerts, and follow-up campaigns.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text fade-in">
-                    <h2>Why Choose Jack The Inbox?</h2>
-                    <p>With over 5 years of experience in digital marketing design, we specialize in creating assets that don't just look great—they perform. Our data-driven approach ensures every design element is optimized for engagement and conversion.</p>
-                    <p>We understand the unique challenges of email and SMS marketing, from deliverability concerns to mobile optimization. Our team stays current with the latest design trends and platform requirements to ensure your campaigns always look professional and perform exceptionally.</p>
-                    <a href="#contact" class="btn-primary">Let's Work Together</a>
-                </div>
-                <div class="about-image fade-in">
-                    🚀 Design Excellence
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="fade-in">Ready to Elevate Your Campaigns?</h2>
-            <form class="contact-form fade-in" id="contactForm">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="company">Company Name</label>
-                    <input type="text" id="company" name="company">
-                </div>
-                <div class="form-group">
-                    <label for="service">Service Needed</label>
-                    <select id="service" name="service" required style="width: 100%; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; background: white;">
-                        <option value="">Select a service...</option>
-                        <option value="email-templates">Email Templates</option>
-                        <option value="sms-graphics">SMS Graphics</option>
-                        <option value="brand-assets">Brand Assets</option>
-                        <option value="campaign-analytics">Campaign Analytics</option>
-                        <option value="full-campaign">Complete Campaign Package</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="message">Project Details</label>
-                    <textarea id="message" name="message" placeholder="Tell us about your project, timeline, and any specific requirements..." required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send Project Inquiry</button>
-            </form>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Jack The Inbox</h3>
-                    <p>Premium digital assets for email and SMS campaigns that drive real results for your business.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <p><a href="#services">Email Templates</a></p>
-                    <p><a href="#services">SMS Graphics</a></p>
-                    <p><a href="#services">Brand Assets</a></p>
-                    <p><a href="#services">Campaign Analytics</a></p>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p>hello@jacktheinbox.com</p>
-                    <p>+1 (555) 123-4567</p>
-                    <p>Available Mon-Fri, 9AM-6PM EST</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Jack The Inbox. All rights reserved. | Designed for conversion, built for results.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.boxShadow = 'none';
-            }
-        });
-
-        // Contact form handling
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-            
-            // Simulate form submission
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                submitBtn.textContent = 'Message Sent! ✓';
-                submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
                 
-                // Reset form
-                setTimeout(() => {
-                    this.reset();
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                    submitBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                }, 2000);
-            }, 1500);
-        });
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 item gallery-image">
+                <div class="item-wrapper" data-toggle="modal" data-bs-toggle="modal" data-target="#uP8GLjTWjT-modal" data-bs-target="#uP8GLjTWjT-modal">
+                    <img class="w-100" src="assets/images/gallery13.jpg" alt="Mobirise Website Builder" data-slide-to="1" data-bs-slide-to="1" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT">
+                    <div class="icon-wrapper">
+                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 item gallery-image">
+                <div class="item-wrapper" data-toggle="modal" data-bs-toggle="modal" data-target="#uP8GLjTWjT-modal" data-bs-target="#uP8GLjTWjT-modal">
+                    <img class="w-100" src="assets/images/gallery10.jpg" alt="Mobirise Website Builder" data-slide-to="2" data-bs-slide-to="2" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT">
+                    <div class="icon-wrapper">
+                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 item gallery-image">
+                <div class="item-wrapper" data-toggle="modal" data-bs-toggle="modal" data-target="#uP8GLjTWjT-modal" data-bs-target="#uP8GLjTWjT-modal">
+                    <img class="w-100" src="assets/images/gallery08.jpg" alt="Mobirise Website Builder" data-slide-to="3" data-bs-slide-to="3" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT">
+                    <div class="icon-wrapper">
+                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 item gallery-image">
+                <div class="item-wrapper" data-toggle="modal" data-bs-toggle="modal" data-target="#uP8GLjTWjT-modal" data-bs-target="#uP8GLjTWjT-modal">
+                    <img class="w-100" src="assets/images/gallery06.jpg" alt="Mobirise Website Builder" data-slide-to="4" data-bs-slide-to="4" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT">
+                    <div class="icon-wrapper">
+                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 item gallery-image">
+                <div class="item-wrapper" data-toggle="modal" data-bs-toggle="modal" data-target="#uP8GLjTWjT-modal" data-bs-target="#uP8GLjTWjT-modal">
+                    <img class="w-100" src="assets/images/gallery02.jpg" alt="Mobirise Website Builder" data-slide-to="5" data-bs-slide-to="5" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT">
+                    <div class="icon-wrapper">
+                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 item gallery-image">
+                <div class="item-wrapper" data-toggle="modal" data-bs-toggle="modal" data-target="#uP8GLjTWjT-modal" data-bs-target="#uP8GLjTWjT-modal">
+                    <img class="w-100" src="assets/images/gallery01.jpg" alt="Mobirise Website Builder" data-slide-to="6" data-bs-slide-to="6" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT">
+                    <div class="icon-wrapper">
+                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
 
-        // Portfolio item click handlers
-        document.querySelectorAll('.portfolio-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const title = this.querySelector('h3').textContent;
-                alert(`Portfolio piece: ${title}\n\nClick to view full case study and design details.`);
-            });
-        });
-    </script>
-</body>
+        <div class="modal mbr-slider" tabindex="-1" role="dialog" aria-hidden="true" id="uP8GLjTWjT-modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="carousel slide" id="lb-uP8GLjTWjT" data-interval="5000" data-bs-interval="5000">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="assets/images/gallery03.jpg" alt="Mobirise Website Builder">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="assets/images/gallery13.jpg" alt="Mobirise Website Builder">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="assets/images/gallery10.jpg" alt="Mobirise Website Builder">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="assets/images/gallery08.jpg" alt="Mobirise Website Builder">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="assets/images/gallery06.jpg" alt="Mobirise Website Builder">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="assets/images/gallery02.jpg" alt="Mobirise Website Builder">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="assets/images/gallery01.jpg" alt="Mobirise Website Builder">
+                                </div>
+                            </div>
+                            <ol class="carousel-indicators">
+                                <li data-slide-to="0" data-bs-slide-to="0" class="active" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT"></li>
+                                <li data-slide-to="1" data-bs-slide-to="1" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT"></li>
+                                <li data-slide-to="2" data-bs-slide-to="2" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT"></li>
+                                <li data-slide-to="3" data-bs-slide-to="3" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT"></li>
+                                <li data-slide-to="4" data-bs-slide-to="4" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT"></li>
+                                <li data-slide-to="5" data-bs-slide-to="5" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT"></li>
+                                <li data-slide-to="6" data-bs-slide-to="6" data-target="#lb-uP8GLjTWjT" data-bs-target="#lb-uP8GLjTWjT"></li>
+                            </ol>
+                            <a role="button" href="" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
+                            </a>
+                            <a class="carousel-control-prev carousel-control" role="button" data-slide="prev" data-bs-slide="prev" href="#lb-uP8GLjTWjT">
+                                <span class="mobi-mbri mobi-mbri-arrow-prev" aria-hidden="true"></span>
+                                <span class="sr-only visually-hidden">Previous</span>
+                            </a>
+                            <a class="carousel-control-next carousel-control" role="button" data-slide="next" data-bs-slide="next" href="#lb-uP8GLjTWjT">
+                                <span class="mobi-mbri mobi-mbri-arrow-next" aria-hidden="true"></span>
+                                <span class="sr-only visually-hidden">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="header09 cid-tLAX5BnXkJ" id="header09-q">
+	
+	
+	<div class="container">
+		<div class="row">
+			<div class="content-wrap col-12 col-md-8">
+				<h1 class="mbr-section-title mbr-fonts-style mbr-white mb-4 display-1"><strong>Unlock boundless possibilities</strong></h1>
+				
+				<p class="mbr-fonts-style mbr-text mbr-white mb-4 display-7">
+					Mobirise Free Website Maker is perfect for non-techies and great for pro-coders for fast prototyping and small customers' projects.
+				</p>
+				<div class="mbr-section-btn"><a class="btn btn-white-outline display-7" href="https://mobiri.se">Learn more</a></div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section data-bs-version="5.1" class="header7 cid-tLeaLmEeFr" id="header07-h">
+  
+
+  
+  
+  
+  <div class="align-center container">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-9 mb-5">
+        <h1 class="mbr-section-title mbr-fonts-style display-1"><strong>Block with video</strong>
+        </h1>
+        <p class="mbr-text mbr-fonts-style mt-4 display-7">
+          Click on the media content to replace it. In some blocks, you can change media content via Block Parameters.
+        </p>
+        
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="mbr-figure col-12 col-md-12"><iframe class="mbr-embedded-video" src="https://www.youtube.com/embed/sGpPgQeEyOc?rel=0&amp;amp;mute=1&amp;showinfo=0&amp;autoplay=1&amp;loop=1&amp;playlist=sGpPgQeEyOc" width="1280" height="720" frameborder="0" allowfullscreen></iframe></div>
+    </div>
+  </div>
+</section>
+
+<section data-bs-version="5.1" class="header1 cid-tJS9vXDdRK" id="header01-7">
+	
+
+	
+	
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-12 col-lg-7 image-wrapper">
+				<img class="w-100" src="assets/images/gallery01.jpg" alt="Mobirise Website Builder">
+			</div>
+			<div class="col-12 col-lg col-md-12">
+				<div class="text-wrapper align-left">
+					<h1 class="mbr-section-title mbr-fonts-style mb-4 display-2"><strong>About us</strong></h1>
+					<p class="mbr-text mbr-fonts-style mb-4 display-7">
+						Most blocks can be used with various types of backgrounds: color, pictures, or videos. It can be set in Block Parameters.&nbsp;You can show/hide the title, subtitle, text, button in the Block Parameters (blue gear icon at the top right corner of the block).&nbsp;</p>
+					<div class="mbr-section-btn mt-3"><a class="btn btn-primary display-7" href="https://mobiri.se">Start now</a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section data-bs-version="5.1" class="features15 cid-tLek7gQhG7" id="features015-m">
+	
+
+	
+	
+	<div class="container">
+		<div class="mbr-section-head mb-5">
+			<h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+			  <strong>Why us?</strong></h4>
+			
+		  </div>
+		<div class="row justify-content-center">
+			<div class="item features-without-image col-12 col-lg-4">
+				<div class="item-wrapper">
+					<div class="img-wrapper">
+						<img src="assets/images/shop1.jpg" alt="Mobirise Website Builder">
+					</div>
+					<div class="card-box">
+						<h4 class="card-title mbr-fonts-style mb-3 display-5">
+							<strong>Free</strong></h4>
+						<h5 class="card-text mbr-fonts-style display-7">
+							Mobirise is a free website builder. Mobirise is a free website builder. Mobirise is a free website builder.</h5>
+					</div>
+				</div>
+			</div>
+			<div class="item features-without-image col-12 col-lg-4">
+				<div class="item-wrapper">
+					<div class="img-wrapper">
+						<img src="assets/images/shop2.jpg" alt="Mobirise Website Builder">
+					</div>
+					<div class="card-box">
+						<h4 class="card-title mbr-fonts-style mb-3 display-5">
+							<strong>Easy</strong></h4>
+						<h5 class="card-text mbr-fonts-style display-7">
+							Create landing pages with ease. Create landing pages with ease. Create landing pages with ease.<br><br></h5>
+					</div>
+				</div>
+			</div>
+			<div class="item features-without-image col-12 col-lg-4">
+				<div class="item-wrapper">
+					<div class="img-wrapper">
+						<img src="assets/images/shop3.jpg" alt="Mobirise Website Builder">
+					</div>
+					<div class="card-box">
+						<h4 class="card-title mbr-fonts-style mb-3 display-5">
+							<strong>Beautiful</strong></h4>
+						<h5 class="card-text mbr-fonts-style display-7">
+							Build a website with Mobirise. Build a web page with Mobirise. Create a website with Mobirise.</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section data-bs-version="5.1" class="form5 cid-tJS9pBcTSa" id="form02-6">
+    
+    
+    <div class="container">
+        <div class="mbr-section-head mb-5">
+            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                <strong>Contact Form</strong></h3>
+            <h4 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-4 display-7">To change your notification email, click on any form field below.
+<div>The number of submissions is limited to 10 per day without the Form Builder.</div></h4>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
+                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="Y9UYfFJg9q2807MfjBKHsBZrRtmJd16zg/zRUHhKB/ttQDCMx0BYdKVDTWtAafHVFbpmeGy4smLA3GaUlfLd5cH7aeqMf655E/Gn1KWnQccVJwCRkppdE2zZAZV4cUVr">
+                    <div class="row">
+                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
+                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+                            Oops...! some problem!
+                        </div>
+                    </div>
+                    <div class="dragArea row">
+                        <div class="col-md col-sm-12 form-group mb-3" data-for="name">
+                            <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-form02-6">
+                        </div>
+                        <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+                            <input type="email" name="email" placeholder="Email" data-form-field="email" class="form-control" value="" id="email-form02-6">
+                        </div>
+                        <div class="col-12 form-group mb-3" data-for="phone">
+                            <input type="tel" name="phone" placeholder="Phone" data-form-field="phone" class="form-control" value="" id="phone-form02-6">
+                        </div>
+                        <div class="col-12 form-group mb-3" data-for="textarea">
+                            <textarea name="textarea" placeholder="Message" data-form-field="textarea" class="form-control" id="textarea-form02-6"></textarea>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
+                            <button type="submit" class="btn btn-primary display-7">Send message</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="contacts2 map1 cid-tLdYHD757A" id="contacts02-9">
+
+    
+
+    
+    <div class="container">
+        <div class="mbr-section-head mb-5">
+            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                <strong>Contacts</strong>
+            </h3>
+            
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="card col-12 col-md-5">
+                <div class="card-wrapper">
+                    <div class="text-wrapper">
+                        <h5 class="cardTitle mbr-fonts-style mb-2 display-5">
+                        <strong>Get in touch</strong></h5>
+                    <ul class="list mbr-fonts-style display-7">
+                        <li class="mbr-text item-wrap"><span style="font-size: 1.4rem;">Phone: </span><a href="tel:+12345678910" class="text-primary" style="font-size: 1.4rem;">0 (800) 123 45 67</a><br></li>
+                        <li class="mbr-text item-wrap">WhatsApp: <a href="https://wa.me/12345678910" class="text-primary">0 (800) 123 45 67</a></li>
+                        <li class="mbr-text item-wrap">Email: <a href="mailto:info@site.com" class="text-primary">info@site.com</a></li><li class="mbr-text item-wrap"><br></li>
+                        <li class="mbr-text item-wrap">Address: </li><li class="mbr-text item-wrap">350 5th Ave, New York, NY 10118</li><li class="mbr-text item-wrap"><span style="font-size: 1.4rem;">Working hours:</span><br></li><li class="mbr-text item-wrap">9:00AM - 6:00PM</li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="map-wrapper col-12 col-md-7">
+                <div class="google-map"><iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6045.3003145248895!2d-73.9884657!3d40.7477229!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9ac1f1b85%3A0x7e33d1c0e7af3be4!2zMzUwIDV0aCBBdmUsIE5ldyBZb3JrLCBOWSAxMDExOCwg0KHQqNCQ!5e0!3m2!1sru!2sru!4v1689597362021!5m2!1sen!2sen" allowfullscreen=""></iframe></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="footer3 programm5 cid-tJS9NNcTLZ" once="footers" id="footer03-8">
+
+        
+
+    
+
+    <div class="container">
+        <div class="row">
+
+            <div class="row-links mb-4">
+                <ul class="header-menu">
+                  
+                  
+                  
+                  
+                <li class="header-menu-item mbr-fonts-style display-5"></li><li class="header-menu-item mbr-fonts-style display-5"><a href="https://calendly.com/jrmcgoldy/45-minute-meeting" class="text-secondary" target="_blank">Book a Call</a></li><li class="header-menu-item mbr-fonts-style display-5"><a href="page3.html#features032-29" class="text-secondary">Services</a></li><li class="header-menu-item mbr-fonts-style display-5">Follow us</li><li class="header-menu-item mbr-fonts-style display-5"></li></ul>
+              </div>
+
+            <div class="col-12">
+                
+            </div>
+            <div class="col-12 mt-5">
+                <p class="mbr-fonts-style copyright display-7">
+                    © Copyright 2025 JackTheInbox - All Rights Reserved
+                </p>
+            </div>
+        </div>
+    </div>
+</section><section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: flex;position: relative;height: 4rem;"><a href="https://mobiri.se/4058917" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">&#8204;</p><a style="z-index:1" href="https://mobirise.com/offline-website-builder.html">Offline Website Builder</a></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/masonry/masonry.pkgd.min.js"></script>  <script src="assets/imagesloaded/imagesloaded.pkgd.min.js"></script>  <script src="assets/theme/js/script.js"></script>  <script src="assets/gallery/player.min.js"></script>  <script src="assets/gallery/script.js"></script>  <script src="assets/formoid/formoid.min.js"></script>  
+  
+  
+  <input name="animation" type="hidden">
+  </body>
 </html>
